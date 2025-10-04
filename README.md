@@ -1,6 +1,6 @@
-# Vercel Free Tier Demo - Complete Feature Showcase
+# Python Tools Platform - Run Python Code in the Cloud
 
-A comprehensive demonstration of all Vercel free tier features, designed for seamless integration with Cursor's background agent.
+A powerful web platform for executing Python scripts, managing tools, and storing results. Built on Vercel's serverless platform with persistent storage and real-time execution capabilities.
 
 ## 🚀 Quick Start
 
@@ -15,135 +15,114 @@ npm install
 npm run dev
 ```
 
-## 📋 Features Demonstrated
+### Initialize Database
+```bash
+curl -X POST https://your-domain.vercel.app/api/init-db
+```
 
-### ✅ Serverless Functions
-- **Location**: `app/api/serverless-demo/route.ts`
-- **Demo**: `/api/serverless-demo`
-- **Features**: Auto-scaling, pay-per-request, zero configuration
+## 📋 Platform Features
+
+### ✅ Python Code Execution
+- **Location**: `app/api/python-execute/route.ts`
+- **Demo**: `/api/python-execute`
+- **Features**: Real-time Python execution, error handling, timeout protection
 - **Free Tier**: 100GB-hours execution time
 
-### ⚡ Edge Functions
-- **Location**: `app/api/edge-demo/route.ts`
-- **Demo**: `/api/edge-demo`
-- **Features**: Ultra-low latency, global distribution
-- **Free Tier**: 500,000 invocations
+### 🛠️ Tool Management
+- **Location**: `app/api/tools/route.ts`
+- **Demo**: `/api/tools`
+- **Features**: Create, read, update, delete Python tools with metadata
+- **Free Tier**: 1GB Postgres storage
 
-### 🗄️ Vercel KV (Redis)
-- **Location**: `app/api/kv-demo/route.ts`
-- **Demo**: `/api/kv-demo`
-- **Features**: Redis-compatible, serverless scaling
-- **Free Tier**: 256MB storage
+### 💾 Results Storage
+- **Location**: `app/api/results/route.ts`
+- **Demo**: `/api/results`
+- **Features**: Save execution results, outputs, and generated files
+- **Free Tier**: 1GB Blob storage
 
-### 🐘 Vercel Postgres
-- **Location**: `app/api/postgres-demo/route.ts`
-- **Demo**: `/api/postgres-demo`
-- **Features**: Serverless PostgreSQL, connection pooling
-- **Free Tier**: 1GB storage, 1B row reads
+### 📊 Analytics Dashboard
+- **Location**: `app/analytics/page.tsx`
+- **Demo**: `/analytics`
+- **Features**: Usage tracking, performance metrics, execution history
+- **Free Tier**: Unlimited analytics events
 
-### ☁️ Vercel Blob Storage
-- **Location**: `app/api/blob-demo/route.ts`
-- **Demo**: `/api/blob-demo`
-- **Features**: Object storage, global CDN
-- **Free Tier**: 1GB storage, 1GB bandwidth
+### 🔄 Execution History
+- **Location**: `app/history/page.tsx`
+- **Demo**: `/history`
+- **Features**: View past executions, compare results, manage logs
+- **Free Tier**: Persistent storage
 
-### 🌐 Static File Serving
-- **Location**: `public/static-demo/`
-- **Demo**: `/static-demo`
-- **Features**: Global CDN, automatic compression
-- **Free Tier**: 100GB bandwidth
+### 🌐 Web Interface
+- **Location**: `app/tools/page.tsx`
+- **Demo**: `/tools`
+- **Features**: Interactive tool management, code editor, real-time execution
+- **Free Tier**: Global CDN distribution
 
-### 🔒 Security & Middleware
-- **Location**: `middleware.ts`
-- **Features**: Security headers, rate limiting, bot detection
-- **Free Tier**: All security features included
+## 🛠️ Built-in Python Tools
 
-### 📊 Analytics & Monitoring
-- **Location**: `app/analytics-demo/`
-- **Demo**: `/analytics-demo`
-- **Features**: Real-time analytics, performance monitoring
-- **Free Tier**: Unlimited events, 90-day retention
+### Calculator Tool
+- Advanced mathematical calculations
+- Safe expression evaluation
+- Math library integration
+- Error handling
 
-## 🛠️ Cursor Background Agent Integration
+### Text Processor Tool
+- Text analysis and statistics
+- Email extraction
+- Text cleaning and formatting
+- Word frequency analysis
 
-This project is specifically designed for Cursor's background agent with:
-
-### One-Command Operations
-```bash
-# Deploy to production
-npm run deploy
-
-# Add new API route
-echo 'export async function GET() { return Response.json({ message: "Hello" }) }' > app/api/hello/route.ts
-
-# Add new page
-echo 'export default function NewPage() { return <div>New Page</div> }' > app/new-page/page.tsx
-
-# Add static file
-echo "Hello World" > public/hello.txt
-```
-
-### Automated Deployment
-- Automatic deployments on git push
-- Preview deployments for every PR
-- Zero-downtime deployments
-- Automatic rollbacks on failure
-
-### Environment Management
-```bash
-# Setup environment
-./scripts/setup-env.sh
-
-# Deploy with environment
-./scripts/deploy.sh
-```
+### Data Analyzer Tool
+- Statistical analysis
+- Data visualization preparation
+- JSON data processing
+- Comprehensive statistics
 
 ## 📁 Project Structure
 
 ```
-vercelhostingtests/
+python-tools-platform/
 ├── app/                          # Next.js App Router
 │   ├── api/                      # API Routes (Serverless Functions)
-│   │   ├── serverless-demo/      # Serverless function demo
-│   │   ├── edge-demo/           # Edge function demo
-│   │   ├── kv-demo/             # KV database demo
-│   │   ├── postgres-demo/       # Postgres database demo
-│   │   ├── blob-demo/           # Blob storage demo
-│   │   ├── security-demo/       # Security features demo
-│   │   ├── analytics-demo/      # Analytics API demo
-│   │   └── status/              # Health check endpoint
-│   ├── analytics-demo/          # Analytics dashboard page
-│   ├── globals.css              # Global styles
-│   ├── layout.tsx               # Root layout
-│   └── page.tsx                 # Home page
-├── public/                       # Static files
-│   ├── static-demo/             # Static file demo
-│   ├── robots.txt               # SEO robots file
-│   └── sitemap.xml              # SEO sitemap
-├── scripts/                      # Automation scripts
-│   ├── deploy.sh                # Deployment script
-│   ├── setup-env.sh             # Environment setup
-│   └── cursor-agent-commands.md # Cursor agent commands
-├── middleware.ts                 # Edge middleware
-├── next.config.js               # Next.js configuration
-├── vercel.json                  # Vercel configuration
-├── package.json                 # Dependencies
-└── README.md                    # This file
+│   │   ├── python-execute/        # Python code execution
+│   │   ├── tools/                 # Tool management
+│   │   ├── results/               # Results storage
+│   │   ├── init-db/              # Database initialization
+│   │   └── status/               # Health check endpoint
+│   ├── tools/                     # Tool management pages
+│   │   ├── page.tsx              # Tools listing
+│   │   └── run/page.tsx          # Tool execution interface
+│   ├── history/                   # Execution history
+│   │   └── page.tsx              # History dashboard
+│   ├── analytics/                 # Analytics dashboard
+│   │   └── page.tsx              # Analytics interface
+│   ├── globals.css                # Global styles
+│   ├── layout.tsx                 # Root layout
+│   └── page.tsx                  # Home page
+├── public/                        # Static files
+├── scripts/                       # Automation scripts
+│   ├── deploy.sh                 # Deployment script
+│   └── setup-env.sh              # Environment setup
+├── middleware.ts                  # Edge middleware
+├── next.config.js                # Next.js configuration
+├── vercel.json                   # Vercel configuration
+├── package.json                  # Dependencies
+└── README.md                     # This file
 ```
 
 ## 🔧 Environment Setup
 
 ### Required Environment Variables
 ```bash
-# Vercel KV (Redis)
-KV_REST_API_URL=your_kv_url
-KV_REST_API_TOKEN=your_kv_token
-
 # Vercel Postgres
 POSTGRES_URL=your_postgres_url
 
 # Vercel Blob Storage
 BLOB_READ_WRITE_TOKEN=your_blob_token
+
+# Vercel KV (Optional - for caching)
+KV_REST_API_URL=your_kv_url
+KV_REST_API_TOKEN=your_kv_token
 ```
 
 ### Setup Commands
@@ -153,6 +132,9 @@ cp env.example .env.local
 
 # Edit environment variables
 nano .env.local
+
+# Initialize database
+curl -X POST https://your-domain.vercel.app/api/init-db
 
 # Deploy with environment
 npm run deploy
@@ -191,7 +173,6 @@ vercel
 | Edge Functions | 500,000 invocations |
 | Bandwidth | 100GB per month |
 | Build Minutes | 6,000 per month |
-| KV Database | 256MB storage |
 | Postgres Database | 1GB storage, 1B row reads |
 | Blob Storage | 1GB storage, 1GB bandwidth |
 | Custom Domains | Unlimited |
@@ -200,70 +181,57 @@ vercel
 
 ## 🔍 API Endpoints
 
+### Python Execution
+- `POST /api/python-execute` - Execute Python code
+- `GET /api/python-execute` - Get execution history
+- `GET /api/python-execute?id=exec_id` - Get specific execution
+
+### Tool Management
+- `GET /api/tools` - List all tools
+- `POST /api/tools` - Create new tool
+- `PUT /api/tools` - Update tool
+- `DELETE /api/tools?id=tool_id` - Delete tool
+
+### Results Management
+- `GET /api/results` - List results
+- `POST /api/results` - Save result
+- `DELETE /api/results?executionId=exec_id` - Delete result
+
+### Database Management
+- `POST /api/init-db` - Initialize database
+- `GET /api/init-db` - Check database status
+
 ### Health & Status
 - `GET /api/status` - System health check
-- `GET /api/health` - Redirects to status
 
-### Feature Demos
-- `GET /api/serverless-demo` - Serverless function demo
-- `GET /api/edge-demo` - Edge function demo
-- `GET /api/kv-demo` - KV database demo
-- `GET /api/postgres-demo` - Postgres database demo
-- `GET /api/blob-demo` - Blob storage demo
-- `GET /api/security-demo` - Security features demo
-- `GET /api/analytics-demo` - Analytics API demo
+## 🎯 Usage Examples
 
-### Static Files
-- `/static-demo/` - Static file serving demo
-- `/robots.txt` - SEO robots file
-- `/sitemap.xml` - SEO sitemap
-
-## 🎯 Cursor Agent Commands
-
-### Quick Deploy
+### Execute Python Code
 ```bash
-npm run deploy
+curl -X POST https://your-domain.vercel.app/api/python-execute \
+  -H "Content-Type: application/json" \
+  -d '{
+    "code": "print(\"Hello World\")",
+    "toolName": "hello_world"
+  }'
 ```
 
-### Add New Feature
+### Create a Tool
 ```bash
-# Create new API endpoint
-mkdir -p app/api/new-endpoint
-echo 'export async function GET() { return Response.json({ message: "Hello" }) }' > app/api/new-endpoint/route.ts
-
-# Create new page
-mkdir -p app/new-page
-echo 'export default function NewPage() { return <div>New Page</div> }' > app/new-page/page.tsx
-
-# Add static file
-echo "New content" > public/new-file.txt
-
-# Deploy changes
-npm run deploy
+curl -X POST https://your-domain.vercel.app/api/tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My Calculator",
+    "description": "A simple calculator",
+    "code": "print(2 + 2)",
+    "category": "math",
+    "tags": ["calculator", "math"]
+  }'
 ```
 
-### Database Operations
+### Get Execution History
 ```bash
-# Test KV connection
-curl https://your-domain.vercel.app/api/kv-demo
-
-# Test Postgres connection
-curl https://your-domain.vercel.app/api/postgres-demo
-
-# Test Blob storage
-curl -X POST -F "file=@example.txt" https://your-domain.vercel.app/api/blob-demo
-```
-
-### Monitoring
-```bash
-# Check API status
-curl https://your-domain.vercel.app/api/status
-
-# View analytics
-curl https://your-domain.vercel.app/api/analytics-demo
-
-# Check logs
-vercel logs
+curl https://your-domain.vercel.app/api/python-execute
 ```
 
 ## 🛠️ Development
@@ -285,25 +253,31 @@ npm run lint
 
 ### Testing
 ```bash
-# Test all API endpoints
-curl https://localhost:3000/api/status
-curl https://localhost:3000/api/serverless-demo
-curl https://localhost:3000/api/edge-demo
+# Test Python execution
+curl -X POST http://localhost:3000/api/python-execute \
+  -H "Content-Type: application/json" \
+  -d '{"code": "print(\"Hello World\")"}'
+
+# Test tool management
+curl http://localhost:3000/api/tools
+
+# Test database initialization
+curl -X POST http://localhost:3000/api/init-db
 ```
 
 ## 📝 Customization
 
-### Adding New Features
-1. Create new API route in `app/api/`
-2. Create new page in `app/`
-3. Add static files to `public/`
-4. Update navigation in `app/page.tsx`
-5. Deploy with `npm run deploy`
+### Adding New Tools
+1. Create tool via API or web interface
+2. Define Python code and metadata
+3. Test execution
+4. Share with others
 
-### Environment Variables
-1. Copy `env.example` to `.env.local`
-2. Add your Vercel storage credentials
-3. Deploy with `npm run deploy`
+### Custom Python Libraries
+The platform supports standard Python libraries. For custom packages:
+1. Add to requirements.txt
+2. Deploy with updated dependencies
+3. Use in your tools
 
 ### Styling
 - Global styles: `app/globals.css`
@@ -313,10 +287,10 @@ curl https://localhost:3000/api/edge-demo
 ## 🆘 Troubleshooting
 
 ### Common Issues
-1. **Environment variables not working**: Check `.env.local` file
-2. **Database connection failed**: Verify credentials in Vercel dashboard
-3. **Build errors**: Check `npm run build` output
-4. **Deployment failed**: Check `vercel logs`
+1. **Python execution fails**: Check code syntax and imports
+2. **Database connection failed**: Verify POSTGRES_URL
+3. **Blob storage failed**: Verify BLOB_READ_WRITE_TOKEN
+4. **Build errors**: Check `npm run build` output
 
 ### Debug Commands
 ```bash
@@ -331,14 +305,25 @@ vercel logs --limit=50
 
 # Check environment
 vercel env ls
+
+# Test database
+curl https://your-domain.vercel.app/api/init-db
 ```
+
+## 🔒 Security Features
+
+- **Code Sandboxing**: Safe Python execution environment
+- **Input Validation**: All inputs are validated and sanitized
+- **Rate Limiting**: Built-in protection against abuse
+- **Error Handling**: Comprehensive error management
+- **HTTPS**: Automatic SSL/TLS encryption
 
 ## 📚 Resources
 
 - [Vercel Documentation](https://vercel.com/docs)
 - [Next.js Documentation](https://nextjs.org/docs)
+- [Python Documentation](https://python.org)
 - [Vercel Free Tier](https://vercel.com/pricing)
-- [Cursor AI](https://cursor.sh)
 
 ## 🤝 Contributing
 
@@ -354,4 +339,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Built with ❤️ for the Vercel free tier community**
+**Built with ❤️ for the Python community - Run your code in the cloud!**
