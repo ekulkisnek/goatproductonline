@@ -1,7 +1,7 @@
 {
-  "name": "vercel-free-tier-demo",
+  "name": "python-tools-platform",
   "version": "1.0.0",
-  "description": "Complete demonstration of Vercel free tier features",
+  "description": "Web platform for running Python tools with results storage and management",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
