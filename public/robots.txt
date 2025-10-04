@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://vercel-free-tier-demo.vercel.app/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+
+# Disallow admin areas (if any)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+
+# Allow static files
+Allow: /static-demo/
+Allow: /favicon.ico
+Allow: /sitemap.xml

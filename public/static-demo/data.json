@@ -1,0 +1,38 @@
+{
+  "message": "Static JSON Data Demo",
+  "timestamp": "2024-01-01T00:00:00.000Z",
+  "features": [
+    "Global CDN distribution",
+    "Automatic compression",
+    "HTTP/2 support",
+    "Cache optimization",
+    "100GB free bandwidth"
+  ],
+  "performance": {
+    "edgeLocations": 200,
+    "globalLatency": "<50ms",
+    "uptime": "99.9%",
+    "bandwidth": "100GB/month"
+  },
+  "fileTypes": {
+    "images": ["jpg", "png", "gif", "webp", "svg"],
+    "documents": ["pdf", "doc", "txt", "csv"],
+    "archives": ["zip", "tar", "gz"],
+    "media": ["mp4", "mp3", "wav"],
+    "code": ["js", "css", "html", "json"]
+  },
+  "demo": {
+    "note": "This JSON file is served from Vercel's global CDN",
+    "caching": "Optimized cache headers",
+    "compression": "Automatic gzip/brotli",
+    "access": "Public access via URL"
+  },
+  "cursorAgent": {
+    "commands": [
+      "echo 'New data' > public/static-demo/new-data.json",
+      "mkdir -p public/assets",
+      "npm run deploy"
+    ],
+    "note": "Files in public/ are automatically served at the root URL"
+  }
+}
