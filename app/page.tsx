@@ -93,6 +93,13 @@ export default function Home() {
       description: "Built-in analytics, speed insights, and performance monitoring.",
       demo: "/analytics-demo",
       code: "app/analytics-demo/page.tsx"
+    },
+    {
+      icon: <Database className="w-8 h-8 text-emerald-600" />,
+      title: "Semiconductor Fabrication",
+      description: "SPC + wafer map demo, fab KPIs, and engineering workflows.",
+      demo: "/fabrication",
+      code: "app/fabrication/page.tsx"
     }
   ]
 
@@ -125,6 +132,7 @@ export default function Home() {
               <Link href="#features" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">Features</Link>
               <Link href="#limits" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">Free Tier Limits</Link>
               <Link href="#cursor-agent" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">Cursor Agent</Link>
+              <Link href="/fabrication" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">Fabrication</Link>
             </nav>
           </div>
         </div>
