@@ -46,6 +46,13 @@ export default function Home() {
     }
   }, [])
 
+  // Bandwidth Estimator State
+  const CAP_GB = 100 // Vercel Free tier bandwidth cap (approx.)
+  const [avgPayloadKB, setAvgPayloadKB] = useState(300) // default ~static page
+  const [monthlyRequests, setMonthlyRequests] = useState(10000)
+  const usageGB = (avgPayloadKB * monthlyRequests) / (1024 * 1024)
+  const remainingGB = Math.max(0, CAP_GB - usageGB)
+
   const features = [
     {
       icon: <Server className="w-8 h-8 text-blue-600" />,
@@ -194,6 +201,72 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Bandwidth Estimator */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto card">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Bandwidth Estimator (Free Tier)</h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
+            Vercel Free includes approximately <span className="font-semibold">100 GB</span> of CDN bandwidth per month. Use the sliders below to estimate
+            your monthly usage and see how far you are from the cap.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm text-gray-600 dark:text-gray-300 mb-2">Average payload per request (KB)</label>
+              <input
+                type="range"
+                min={10}
+                max={5000}
+                step={10}
+                value={avgPayloadKB}
+                onChange={(e) => setAvgPayloadKB(parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-sm text-gray-500 mt-1">{avgPayloadKB} KB/request</div>
+            </div>
+            <div>
+              <label className="block text-sm text-gray-600 dark:text-gray-300 mb-2">Monthly requests</label>
+              <input
+                type="range"
+                min={100}
+                max={2000000}
+                step={100}
+                value={monthlyRequests}
+                onChange={(e) => setMonthlyRequests(parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-sm text-gray-500 mt-1">{monthlyRequests.toLocaleString()} requests/month</div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div className="card">
+              <div className="text-sm text-gray-500">Estimated usage</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">{usageGB.toFixed(2)} GB</div>
+            </div>
+            <div className="card">
+              <div className="text-sm text-gray-500">Remaining from 100 GB</div>
+              <div className={`text-2xl font-bold ${remainingGB > 0 ? 'text-green-600' : 'text-red-600'}`}>{remainingGB.toFixed(2)} GB</div>
+            </div>
+            <div className="card">
+              <div className="text-sm text-gray-500">Cap</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">100 GB</div>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Examples (how you might reach 100 GB)</h3>
+            <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
+              <li>• Static landing page (~300 KB): about {(Math.floor(100 * 1024 * 1024 / 300)).toLocaleString()} requests</li>
+              <li>• SPA bundle (~1.5 MB): about {(Math.floor(100 * 1024 / 1.5)).toLocaleString()} page loads</li>
+              <li>• Image-heavy page (~4 MB): about {(Math.floor(100 * 1024 / 4)).toLocaleString()} page loads</li>
+              <li>• File downloads (50 MB each): about {(Math.floor(100 * 1024 / 50)).toLocaleString()} downloads</li>
+              <li>• API JSON responses (~50 KB): about {(Math.floor(100 * 1024 * 1024 / 50)).toLocaleString()} calls</li>
+              <li>• 1080p HLS video (~3 GB/hour): roughly 33 streaming hours</li>
+            </ul>
+          </div>
+        </div>
+      </section>
       {/* Features Section */}
       <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 dark:bg-gray-800/50">
         <div className="max-w-7xl mx-auto">
