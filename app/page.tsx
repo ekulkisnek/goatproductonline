@@ -95,6 +95,13 @@ export default function Home() {
       code: "app/analytics-demo/page.tsx"
     },
     {
+      icon: <Globe className="w-8 h-8 text-blue-600" />,
+      title: "Chicago Events Map",
+      description: "Interactive Leaflet map of events in Chicago.",
+      demo: "/chicago-events",
+      code: "app/chicago-events/page.tsx"
+    },
+    {
       icon: <Database className="w-8 h-8 text-emerald-600" />,
       title: "Semiconductor Fabrication",
       description: "SPC + wafer map demo, fab KPIs, and engineering workflows.",
