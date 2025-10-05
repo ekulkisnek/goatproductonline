@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import dynamic from 'next/dynamic'
+// Avoid importing Leaflet on the server; only use it in effects
 
 type ChicagoEvent = {
   id: string
@@ -15,10 +16,27 @@ type ChicagoEvent = {
   category?: string
 }
 
-const MapContainer = dynamic(async () => (await import('react-leaflet')).MapContainer, { ssr: false })
-const TileLayer = dynamic(async () => (await import('react-leaflet')).TileLayer, { ssr: false })
-const Marker = dynamic(async () => (await import('react-leaflet')).Marker, { ssr: false })
-const Popup = dynamic(async () => (await import('react-leaflet')).Popup, { ssr: false })
+const MapContainer = dynamic(() => import('react-leaflet').then(m => m.MapContainer), { ssr: false }) as any
+const TileLayer = dynamic(() => import('react-leaflet').then(m => m.TileLayer), { ssr: false }) as any
+const Marker = dynamic(() => import('react-leaflet').then(m => m.Marker), { ssr: false }) as any
+const Popup = dynamic(() => import('react-leaflet').then(m => m.Popup), { ssr: false }) as any
+
+// Configure default marker icons client-side only
+if (typeof window !== 'undefined') {
+  ;(async () => {
+    const L = await import('leaflet')
+    const DefaultIcon = L.icon({
+      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+      iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    })
+    L.Marker.prototype.options.icon = DefaultIcon
+  })()
+}
 
 export default function ChicagoEventsPage() {
   const [events, setEvents] = useState<ChicagoEvent[]>([])
@@ -32,7 +50,7 @@ export default function ChicagoEventsPage() {
       .catch(() => setEvents([]))
   }, [])
 
-  const center = useMemo(() => ({ lat: 41.8781, lng: -87.6298 }), [])
+  const center = useMemo<[number, number]>(() => [41.8781, -87.6298], [])
 
   const filtered = useMemo(() => {
     return events.filter(e => {
@@ -80,7 +98,7 @@ export default function ChicagoEventsPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 card p-0 overflow-hidden">
-            <MapContainer center={center} zoom={12} scrollWheelZoom className="leaflet-container">
+            <MapContainer center={center} zoom={12} scrollWheelZoom={true} className="leaflet-container">
               <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; OpenStreetMap contributors" />
               {filtered.map(ev => (
                 <Marker key={ev.id} position={[ev.latitude, ev.longitude]}>
