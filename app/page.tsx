@@ -25,16 +25,25 @@ export default function Home() {
   })
 
   useEffect(() => {
-    // Simulate real-time stats
-    const interval = setInterval(() => {
-      setStats(prev => ({
-        requests: prev.requests + Math.floor(Math.random() * 10),
-        functions: prev.functions + Math.floor(Math.random() * 3),
-        bandwidth: prev.bandwidth + Math.floor(Math.random() * 100)
-      }))
-    }, 2000)
-
-    return () => clearInterval(interval)
+    let isMounted = true
+    // Fetch a one-time snapshot from the status API (no auto-increment)
+    fetch('/api/status')
+      .then((r) => r.json())
+      .then((data) => {
+        if (!isMounted) return
+        setStats({
+          requests: typeof data?.metrics?.requests === 'number' ? data.metrics.requests : 0,
+          functions: 0,
+          bandwidth: 0,
+        })
+      })
+      .catch(() => {
+        if (!isMounted) return
+        setStats({ requests: 0, functions: 0, bandwidth: 0 })
+      })
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   const features = [
