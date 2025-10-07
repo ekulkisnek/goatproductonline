@@ -5,7 +5,7 @@
 
 set -e
 
-echo "🚀 Starting Vercel Free Tier Demo Deployment..."
+echo "🚀 Starting Goat Product Online Deployment..."
 
 # Colors for output
 RED='\033[0;31m'
@@ -68,7 +68,7 @@ print_status "Deploying to Vercel..."
 vercel --prod --yes
 
 print_success "Deployment completed successfully!"
-print_status "Your site is now live at: https://vercel-free-tier-demo.vercel.app"
+print_status "Your site is now live at: https://goatproductonline.vercel.app"
 
 # Display useful information
 echo ""
@@ -85,7 +85,7 @@ echo "  • Status: vercel ls"
 echo "  • Logs: vercel logs"
 echo ""
 echo "🌐 Quick Links:"
-echo "  • Main Site: https://vercel-free-tier-demo.vercel.app"
-echo "  • API Status: https://vercel-free-tier-demo.vercel.app/api/status"
-echo "  • Analytics: https://vercel-free-tier-demo.vercel.app/analytics-demo"
-echo "  • Static Demo: https://vercel-free-tier-demo.vercel.app/static-demo"
+echo "  • Main Site: https://goatproductonline.vercel.app"
+echo "  • API Status: https://goatproductonline.vercel.app/api/status"
+echo "  • Analytics: https://goatproductonline.vercel.app/analytics-demo"
+echo "  • Static Demo: https://goatproductonline.vercel.app/static-demo"

@@ -7,20 +7,20 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Vercel Free Tier Demo - Complete Feature Showcase',
-  description: 'Comprehensive demonstration of all Vercel free tier features including serverless functions, edge functions, databases, storage, and more.',
-  keywords: 'Vercel, Next.js, serverless, edge functions, free tier, demo',
-  authors: [{ name: 'Vercel Free Tier Demo' }],
+  title: 'Goat Product Online',
+  description: 'Goat Product Online — clean, fast, and professional storefront and profile.',
+  keywords: 'Goat Product Online, storefront, business card, Next.js, Vercel',
+  authors: [{ name: 'Goat Product Online' }],
   openGraph: {
-    title: 'Vercel Free Tier Demo',
-    description: 'Complete showcase of Vercel free tier capabilities',
+    title: 'Goat Product Online',
+    description: 'Clean, fast, and professional storefront and business profile.',
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Vercel Free Tier Demo',
-    description: 'Complete showcase of Vercel free tier capabilities',
+    title: 'Goat Product Online',
+    description: 'Clean, fast, and professional storefront and business profile.',
   },
   robots: {
     index: true,

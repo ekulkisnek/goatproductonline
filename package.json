@@ -1,7 +1,7 @@
 {
-  "name": "vercel-free-tier-demo",
+  "name": "goat-product-online",
   "version": "1.0.0",
-  "description": "Complete demonstration of Vercel free tier features",
+  "description": "Goat Product Online — professional storefront and business card",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
